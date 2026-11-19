@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 
 public class QuickChat {
@@ -16,11 +19,20 @@ public class QuickChat {
         JOptionPane.showMessageDialog(null, login.returnLoginStatus(loggedIn));
         if(!loggedIn) return;
         while(true) {
-            String choice = JOptionPane.showInputDialog("Menu:\n1) Send Messages\n2) Show recently sent messages\n3) Quit");
+            String choice = JOptionPane.showInputDialog("Menu:\n1) Send Messages\n2) Show recently sent messages\n3) Quit\n4) Stored Messages");
             if(choice==null || choice.equals("3")) {
                 JOptionPane.showMessageDialog(null, "Total messages sent: " + totalSent);
                 break;
             }
+            if(choice.equals("4")) {
+    String sub = JOptionPane.showInputDialog("a. Sender & Recipient\nb. Longest Message\nc. Search by ID\nd. Search by Recipient\ne. Delete by Hash\nf. Display Report");
+    if (sub.equalsIgnoreCase("a")) JOptionPane.showMessageDialog(null, Message.displaySenderAndRecipient());
+    if (sub.equalsIgnoreCase("b")) JOptionPane.showMessageDialog(null, Message.displayLongestStoredMessage());
+    if (sub.equalsIgnoreCase("c")) JOptionPane.showMessageDialog(null, Message.searchByMessageID(JOptionPane.showInputDialog("Enter Message ID:")));
+    if (sub.equalsIgnoreCase("d")) JOptionPane.showMessageDialog(null, Message.searchByRecipient(JOptionPane.showInputDialog("Enter Recipient:")));
+    if (sub.equalsIgnoreCase("e")) JOptionPane.showMessageDialog(null, Message.deleteByHash(JOptionPane.showInputDialog("Enter Hash:")));
+    if (sub.equalsIgnoreCase("f")) JOptionPane.showMessageDialog(null, Message.displayReport());
+}
             if(choice.equals("1")) {
                 String numStr = JOptionPane.showInputDialog("How many messages you want to send?");
                 int num = Integer.parseInt(numStr);

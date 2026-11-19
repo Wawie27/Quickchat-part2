@@ -50,4 +50,42 @@ public class MessageTest {
         Message m = new Message(1, "+27718693002", "Hi");
         assertEquals("Message successfully stored.", m.SentMessage(3));
     }
+ @Test
+    void testSearchRecipient() {
+        String result = Message.searchByRecipient("+27838884567");
+        assertTrue(result.contains("Where are you?"));
+    }
+        @Test
+    void testSearchMessageID() {
+        String result = Message.searchByMessageID("0838884567");
+        assertTrue(result.contains("0838884567") || result.contains("Recipient"));
+    } 
+    @Test
+    void testLongestMessage() {
+        Message m = new Message(1, "+27718693002", "Hi");
+        m.SentMessage(3);
+        String result = Message.displayLongestStoredMessage();
+        assertNotNull(result);
+    }
+    @Test
+    void testDisplaySenderAndRecipient() {
+        Message.populateTestData();
+        String result = Message.displaySenderAndRecipient();
+        assertNotNull(result);
+        assertTrue(result.contains("Developer") || result.contains("Recipient") || result.contains("083"));
+    }
+    @Test
+    void testPopulateTestData() {
+        Message.populateTestData();
+        String result = Message.displaySenderAndRecipient();
+        assertNotNull(result);
+        assertTrue(result.length() > 0);
+    }
+    @Test
+    void testLongestAfterPopulate() {
+        Message.populateTestData();
+        String result = Message.displayLongestStoredMessage();
+        assertNotNull(result);
+        assertTrue(result.length() > 0);
+    }  
 }

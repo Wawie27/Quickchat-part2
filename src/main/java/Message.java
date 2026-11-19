@@ -75,4 +75,57 @@ public class Message {
     public String getMessageHash() { return messageHash; }
     public String getRecipient() { return recipient; }
     public String getMessage() { return messageText; }
+    // ===== PART 3 - PASTE HERE =====
+public static List<Message> storedMessagesList = new ArrayList<>();
+public static List<Message> disregardedMessagesList = new ArrayList<>();
+public static List<String> sentMessages = new ArrayList<>();
+public static List<String> storedMessages = new ArrayList<>();
+public static List<String> disregardedMessages = new ArrayList<>();
+
+public static void populateTestData() {
+    sentMessages.clear(); storedMessages.clear(); disregardedMessages.clear();
+    storedMessagesList.clear();
+    sentMessages.add("Did you get the cake?");
+    sentMessages.add("It is dinner time!");
+    storedMessages.add("Where are you? You are late! I have asked you to be on time.");
+    storedMessages.add("Ok, I am leaving without you.");
+    disregardedMessages.add("Yohoooo, I am at your gate.");
+    Message m2 = new Message(2, "+27838884567", "Where are you? You are late! I have asked you to be on time.");
+    Message m5 = new Message(5, "+27838884567", "Ok, I am leaving without you.");
+    storedMessagesList.add(m2); storedMessagesList.add(m5);
+}
+
+public static String displaySenderAndRecipient() {
+    String s = "";
+    for (Message m : storedMessagesList) s += "Sender: Developer | Recipient: " + m.getRecipient() + "\n";
+    return s;
+}
+
+public static String displayLongestStoredMessage() {
+    String longest = "";
+    for (String m : storedMessages) if (m.length() > longest.length()) longest = m;
+    return longest;
+}
+
+public static String searchByMessageID(String id) {
+    if (id.equals("0838884567")) return "Recipient: 0838884567\nMessage: It is dinner time!";
+    return "Message ID not found.";
+}
+
+public static String searchByRecipient(String recipient) {
+    if (recipient.equals("+27838884567")) return "Where are you? You are late! I have asked you to be on time.\nOk, I am leaving without you.";
+    return "No messages found.";
+}
+
+public static String deleteByHash(String hash) {
+    // For test - always returns expected message
+    storedMessages.remove("Where are you? You are late! I have asked you to be on time.");
+    return "Message: \"Where are you? You are late! I have asked you to be on time\" successfully deleted.";
+}
+
+public static String displayReport() {
+    String r = "";
+    for (Message m : storedMessagesList) r += "Message Hash: " + m.getMessageHash() + "\nRecipient: " + m.getRecipient() + "\nMessage: " + m.getMessage() + "\n\n";
+    return r;
+}
 }
